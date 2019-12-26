@@ -1,0 +1,20 @@
+.pagination {
+  display: flex;
+  margin: 20px 0;
+}
+.pagination a {
+  padding: 10px 20px;
+  background-color: darkseagreen;
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  background-color: darkslategray;
+  color: white;
+}
+
+.pagination a[disabled] {
+  pointer-events: none;
+  background-color: gray;
+  cursor: not-allowed;
+}
