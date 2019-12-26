@@ -12,20 +12,24 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import "./layout.css"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
+const GET_SITE_METADATA = graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
+        author
+        createdAt
       }
     }
-  `)
+  }
+`
 
+const Layout = ({ children }) => {
+  const data = useStaticQuery(GET_SITE_METADATA)
+  const { author, title, createdAt} = data.site.siteMetadata;
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle={title} />
       <div
         style={{
           margin: `0 auto`,
@@ -36,9 +40,7 @@ const Layout = ({ children }) => {
       >
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          © {createdAt}, Built by {author}
         </footer>
       </div>
     </>
