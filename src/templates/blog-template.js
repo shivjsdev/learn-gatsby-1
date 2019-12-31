@@ -1,11 +1,15 @@
 import React from "react"
 import Layout from "../components/layout"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { Link, graphql } from "gatsby"
 import "./blog-template.css"
 
 export const query = graphql`
   query($limit: Int!, $skip: Int!) {
-    allMarkdownRemark(skip: $skip, limit: $limit) {
+    allMarkdownRemark(
+      skip: $skip
+      limit: $limit
+      sort: { order: ASC, fields: [frontmatter___date] }
+    ) {
       edges {
         node {
           id
@@ -17,6 +21,7 @@ export const query = graphql`
             date
           }
           html
+          excerpt(pruneLength: 100)
         }
       }
     }
@@ -29,33 +34,26 @@ const Pagination = ({
   isFirstPage,
   isLastPage,
   totalPages,
-  limit,
-  skip,
 }) => {
+  console.log(totalPages)
   const buttons = []
+  const backUrl = currentPage === 2 ? path : `${path}/${currentPage - 1}`
+  const nextUrl = `${path}/${currentPage + 1}`
   buttons.push(
-    <Link
-      to={currentPage === 2 ? path : `${path}/${currentPage - 1}`}
-      disabled={isFirstPage}
-      key="back"
-    >
+    <Link to={backUrl} disabled={isFirstPage} key="back">
       Back
     </Link>
   )
-  for (let i = 0; i < totalPages; i++) {
-    const j = i + 1
+  for (let i = 0, j = 1; i < totalPages; i += 1, j++) {
+    const btnUrl = j === 1 ? path : `${path}/${j}`
     buttons.push(
-      <Link
-        to={j === 1 ? path : `${path}/${j}`}
-        disabled={j === currentPage}
-        key={i}
-      >
+      <Link to={btnUrl} disabled={j === currentPage} key={i}>
         {j}
       </Link>
     )
   }
   buttons.push(
-    <Link to={`${path}/${currentPage + 1}`} disabled={isLastPage} key="next">
+    <Link to={nextUrl} disabled={isLastPage} key="next">
       Next
     </Link>
   )
@@ -63,9 +61,9 @@ const Pagination = ({
   return <div className="pagination">{buttons}</div>
 }
 
-const BlogTemplate = ({ data, pageContext, path }) => {
+const BlogTemplate = ({ data, pageContext }) => {
   const { edges } = data.allMarkdownRemark
-
+  console.log({ ...pageContext })
   return (
     <Layout>
       <div>
@@ -89,10 +87,9 @@ const BlogTemplate = ({ data, pageContext, path }) => {
                   </td>
                   <td>{date}</td>
                   <td>
-                    <code>{node.html}</code>
-                    <br />
-                    <br />
-                    <div dangerouslySetInnerHTML={{ __html: node.html }}></div>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: node.excerpt }}
+                    ></div>
                   </td>
                 </tr>
               )

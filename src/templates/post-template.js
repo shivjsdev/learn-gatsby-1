@@ -9,9 +9,10 @@ export const query = graphql`
   query($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
+      timeToRead
       frontmatter {
         title
-        date
+        date(fromNow: true)
       }
     }
   }
@@ -19,13 +20,17 @@ export const query = graphql`
 
 // The result of the above query is passed down as a prop: data
 const PostTemplate = ({ data }) => {
-  const { html, frontmatter } = data.markdownRemark
-  const { title } = frontmatter
+  const { html, frontmatter, timeToRead } = data.markdownRemark
+  const { title, date } = frontmatter
 
   return (
     <Layout>
       <h1>{title}</h1>
-      <p dangerouslySetInnerHTML={{ __html: html }}></p>
+      <h5 className="border border-gray-200 p-5">
+        It will take {timeToRead} mins to read
+      </h5>
+      <p dangerouslySetInnerHTML={{ __html: html }} className="p-10"></p>
+      <p className="bg-gray-400 p-5">{date}</p>
     </Layout>
   )
 }

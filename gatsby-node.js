@@ -49,11 +49,13 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   // To create blog page with pagination
-  posts.forEach((_, index, postsArr) => {
-    const totalPages = postsArr.length
-    const postsPerPage = 1
-    const currentPage = index + 1
-    const isFirstPage = index === 0
+  const postsPerPage = 4
+  const totalPages = Math.ceil(posts.length / postsPerPage)
+  console.log(totalPages)
+  for (let i = 0; i < totalPages; i++) {
+    const currentPage = i + 1
+
+    const isFirstPage = currentPage === 1
     const isLastPage = currentPage === totalPages
 
     actions.createPage({
@@ -61,12 +63,12 @@ exports.createPages = async ({ graphql, actions }) => {
       component: BlogTemplate,
       context: {
         limit: postsPerPage,
-        skip: index * postsPerPage,
+        skip: i * postsPerPage,
         isFirstPage,
         isLastPage,
         currentPage,
         totalPages,
       },
     })
-  })
+  }
 }
