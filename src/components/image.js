@@ -34,10 +34,19 @@ const Image = () => {
   `)
 
   return (
-    <>
-      <Img fluid={data.placeholderImage.childImageSharp.fluid} />
-      <Img fluid={data.iconImage.childImageSharp.fluid} />
-    </>
+    <section className="flex flex-col w-full mt-8">
+      <h1> List of fluid images fetched using Gatsby-image</h1>
+      <div className="flex flex-row">
+        <Img
+          fluid={data.placeholderImage.childImageSharp.fluid}
+          className="w-1/5 m-4"
+        />
+        <Img
+          fluid={data.iconImage.childImageSharp.fluid}
+          className="w-1/5 m-4"
+        />
+      </div>
+    </section>
   )
 }
 

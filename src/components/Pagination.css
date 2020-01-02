@@ -3,8 +3,10 @@
   margin: 20px 0;
 }
 .pagination a {
-  padding: 10px 20px;
-  background-color: darkseagreen;
+  @apply bg-blue-600;
+  @apply text-white;
+  @apply px-4;
+  @apply py-3;
   text-decoration: none;
 }
 
