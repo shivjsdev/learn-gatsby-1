@@ -1,3 +1,62 @@
 @tailwind base;
+
+@font-face {
+  font-family: "Fira Code";
+  font-style: normal;
+  font-weight: 400;
+  src: local("FiraCode"), local("FiraCode-Regular"),
+    url("./fonts/FiraCode/FiraCode-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Fira Code";
+  font-style: normal;
+  font-weight: bold;
+  src: local("FiraCode"), local("FiraCode-Bold"),
+    url("./fonts/FiraCode/FiraCode-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Fira Code";
+  font-style: normal;
+  font-weight: lighter;
+  src: local("FiraCode"), local("FiraCode-Light"),
+    url("./fonts/FiraCode/FiraCode-Light.ttf");
+}
+
+@font-face {
+  font-family: "Fira Code";
+  font-style: normal;
+  font-weight: 500;
+  src: local("FiraCode"), local("FiraCode-Medium"),
+    url("./fonts/FiraCode/FiraCode-Medium.ttf");
+}
+
+html {
+  font-family: "Fira Code";
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  @apply text-3xl;
+  @apply font-bold;
+}
+h2 {
+  @apply text-2xl;
+  @apply font-medium;
+}
+h3 {
+  @apply text-lg;
+}
+a {
+  @apply text-blue-600;
+}
+
 @tailwind components;
 @tailwind utilities;
