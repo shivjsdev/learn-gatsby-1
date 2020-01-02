@@ -1,4 +1,5 @@
 ---
+id: 10
 title: My 10 markdown post
 date: 2019-01-10
 ---

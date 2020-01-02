@@ -1,4 +1,5 @@
 ---
+id: 8
 title: My 8 markdown post
 date: 2019-01-08
 ---

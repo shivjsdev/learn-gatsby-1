@@ -1,4 +1,5 @@
 ---
+id: 12
 title: My 12 markdown post
 date: "2019-01-12"
 ---
