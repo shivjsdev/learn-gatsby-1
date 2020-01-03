@@ -1,20 +1,6 @@
 const path = require("path")
 const { createFilePath } = require("gatsby-source-filesystem")
 
-// create a field name called "slug" which is a unique path for
-// update the node with fields named slug and its value
-exports.onCreateNode = ({ node, getNode, actions }) => {
-  if (node.internal.type === "MarkdownRemark") {
-    // node     : The node you'd like to convert to a path
-    // getNode  : Method used to get a node
-    // basePath : The base path for your files.
-    const slug = createFilePath({ node, getNode, basePath: "posts" })
-
-    // create field of name slug and its value as path
-    actions.createNodeField({ node, name: "slug", value: slug })
-  }
-}
-
 const PostTemplate = path.resolve("./src/templates/post-template.js")
 const BlogTemplate = path.resolve("./src/templates/blog-template.js")
 const ProductTemplate = path.resolve("./src/templates/product-template.js")
@@ -86,6 +72,27 @@ const createAllProducts = (actions, products) => {
     console.error("Failed to create products page", error)
   }
 }
+
+// create a field name called "slug" which is a unique path for
+// update the node with fields named slug and its value
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  try {
+    if (node.internal.type === "MarkdownRemark") {
+      // node     : The node you'd like to convert to a path
+      // getNode  : Method used to get a node
+      // basePath : The base path for your files.
+      const slug = createFilePath({ node, getNode, basePath: "posts" })
+      console.log(slug)
+      // create field of name slug and its value as path
+      if (slug) {
+        actions.createNodeField({ node, name: "slug", value: slug })
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // create the pages
 exports.createPages = async ({ graphql, actions }) => {
   console.log(">>> Fetching data")

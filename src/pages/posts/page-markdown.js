@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../../components/layout"
 import PostList from "../../components/PostList"
 
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
 const GET_MD_DOCS = graphql`
   {

@@ -4,10 +4,6 @@ import React from "react"
 import gatsbyIcon from "../images/gatsby-icon.png"
 import { FaShoppingCart } from "react-icons/fa"
 
-const isActive = props => {
-  console.log(props)
-}
-
 const NavLink = props => (
   <Link
     {...props}
