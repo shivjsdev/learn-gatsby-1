@@ -2,9 +2,19 @@
   @apply flex;
   @apply flex-row;
 }
+.netlify-identity-user-details {
+  @apply flex;
+  @apply flex-col;
+  @apply w-48;
+  @apply text-gray-500;
+}
+.netlify-identity-user {
+  @apply text-sm;
+}
 
 .netlify-identity-signup,
-.netlify-identity-login {
+.netlify-identity-login,
+.netlify-identity-logout {
   @apply cursor-pointer;
   @apply text-white;
   @apply inline-block;
@@ -16,6 +26,7 @@
 }
 
 .netlify-identity-signup:hover,
-.netlify-identity-login:hover {
+.netlify-identity-login:hover,
+.netlify-identity-logout:hover {
   @apply bg-purple-800;
 }
