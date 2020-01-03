@@ -1,0 +1,21 @@
+.netlify-identity-menu {
+  @apply flex;
+  @apply flex-row;
+}
+
+.netlify-identity-signup,
+.netlify-identity-login {
+  @apply cursor-pointer;
+  @apply text-white;
+  @apply inline-block;
+  @apply p-2;
+  @apply m-1;
+  @apply w-24;
+  @apply text-center;
+  @apply rounded-lg;
+}
+
+.netlify-identity-signup:hover,
+.netlify-identity-login:hover {
+  @apply bg-purple-800;
+}
